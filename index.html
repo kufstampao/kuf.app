@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StampaoKuf · Suite de Herramientas</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#141228;--s1:#1c1938;--s2:#221e45;--s3:#2b2760;
+  --br:#3a3668;--br2:#4a4480;
+  --navy:#2b2d7e;--mg:#e8195a;--mg2:#ff3d6e;
+  --tx:#f5f2ff;--tx2:#ccc8ee;--tx3:#a8a3d0;
+  --mu2:#7e7aa8;
+  --ok:#3ec87a;--wn:#ffaa00;--er:#ff4455;
+  --r:10px;--rl:14px;
+  --mono:'Space Mono',monospace;--body:'DM Sans',sans-serif
+}
+html,body{min-height:100vh;font-family:var(--body);background:var(--bg);color:var(--tx)}
+
+/* ── HEADER ── */
+.hdr{background:var(--navy);border-bottom:3px solid var(--mg);padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:50}
+.hdr-left{display:flex;align-items:center;gap:14px}
+.hdr-logo{height:42px;width:auto}
+.hdr-sep{width:1px;height:30px;background:rgba(255,255,255,.2)}
+.hdr-sub{font-family:var(--mono);font-size:11px;font-weight:700;color:rgba(255,255,255,.45);letter-spacing:.16em;text-transform:uppercase}
+.hdr-badge{font-family:var(--mono);font-size:10px;font-weight:700;padding:4px 11px;background:rgba(232,25,90,.15);color:var(--mg2);border:0.5px solid rgba(232,25,90,.3);border-radius:20px;letter-spacing:.08em}
+
+/* ── HERO ── */
+.hero{padding:64px 32px 48px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 0%,rgba(43,45,126,.55) 0%,transparent 70%);pointer-events:none}
+.hero-eyebrow{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--mg);letter-spacing:.2em;text-transform:uppercase;margin-bottom:16px}
+.hero-title{font-size:38px;font-weight:700;color:var(--tx);line-height:1.15;margin-bottom:14px;letter-spacing:-.01em}
+.hero-title span{color:var(--mg)}
+.hero-desc{font-size:16px;color:var(--tx3);max-width:520px;margin:0 auto;line-height:1.65}
+
+/* ── DIVIDER ── */
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--br) 20%,var(--br) 80%,transparent);margin:0 32px}
+
+/* ── TOOLS GRID ── */
+.tools-section{padding:48px 32px 64px}
+.section-label{font-family:var(--mono);font-size:10px;font-weight:700;color:var(--mu2);letter-spacing:.16em;text-transform:uppercase;margin-bottom:28px;display:flex;align-items:center;gap:10px}
+.section-label::after{content:'';flex:1;height:0.5px;background:var(--br)}
+.cards-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+
+/* ── TOOL CARD ── */
+.tool-card{background:var(--s1);border:0.5px solid var(--br);border-radius:var(--rl);overflow:hidden;transition:border-color .2s,transform .15s;display:flex;flex-direction:column;text-decoration:none;cursor:pointer;position:relative}
+.tool-card:hover{border-color:var(--br2);transform:translateY(-3px)}
+.tool-card:hover .card-arrow{opacity:1;transform:translateX(0)}
+.card-accent{height:4px;width:100%}
+.ac-mg{background:linear-gradient(90deg,var(--mg),#b5103f)}
+.ac-blue{background:linear-gradient(90deg,#2b5fcc,#185fa5)}
+.ac-teal{background:linear-gradient(90deg,#0f9e75,#0a6e52)}
+.card-body{padding:22px 22px 18px;flex:1;display:flex;flex-direction:column;gap:12px}
+.card-icon-wrap{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px}
+.ic-mg{background:rgba(232,25,90,.12);color:var(--mg)}
+.ic-blue{background:rgba(43,95,204,.15);color:#5b8cf5}
+.ic-teal{background:rgba(15,158,117,.12);color:#2dd4a0}
+.card-title{font-size:17px;font-weight:700;color:var(--tx);line-height:1.2}
+.card-desc{font-size:13px;color:var(--tx3);line-height:1.6;flex:1}
+.card-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+.tag{font-family:var(--mono);font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;letter-spacing:.04em;text-transform:uppercase}
+.tag-mg{background:rgba(232,25,90,.1);color:var(--mg)}
+.tag-blue{background:rgba(43,95,204,.12);color:#7aaaf5}
+.tag-teal{background:rgba(15,158,117,.1);color:#2dd4a0}
+.tag-gray{background:rgba(58,54,104,.5);color:var(--tx3)}
+.card-footer{padding:14px 22px 18px;border-top:0.5px solid var(--br);display:flex;align-items:center;justify-content:space-between}
+.card-link{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--tx3);letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center;gap:7px;text-decoration:none;transition:color .15s}
+.tool-card:hover .card-link{color:var(--tx)}
+.card-arrow{font-size:16px;opacity:.4;transform:translateX(-4px);transition:all .2s}
+.card-status{font-family:var(--mono);font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;letter-spacing:.06em}
+.st-ready{background:rgba(62,200,122,.1);color:var(--ok);border:0.5px solid rgba(62,200,122,.25)}
+.st-beta{background:rgba(255,170,0,.1);color:var(--wn);border:0.5px solid rgba(255,170,0,.25)}
+
+/* ── FOOTER ── */
+.footer{border-top:1px solid var(--br);padding:28px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.footer-brand{display:flex;align-items:center;gap:10px}
+.footer-brand img{height:28px;opacity:.7}
+.footer-copy{font-size:12px;color:var(--mu2)}
+.footer-links{display:flex;gap:20px}
+.footer-link{font-family:var(--mono);font-size:10px;font-weight:700;color:var(--mu2);text-decoration:none;letter-spacing:.08em;text-transform:uppercase;transition:color .15s}
+.footer-link:hover{color:var(--tx3)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:720px){
+  .cards-grid{grid-template-columns:1fr}
+  .hero-title{font-size:28px}
+  .hdr{padding:0 18px}
+  .hero,.tools-section{padding-left:18px;padding-right:18px}
+  .footer{padding:20px 18px}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="hdr">
+  <div class="hdr-left">
+    <img class="hdr-logo" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDI4LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkNhcGFfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiCgkgdmlld0JveD0iMCAwIDkwMCA5MDAiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDkwMCA5MDA7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPHN0eWxlIHR5cGU9InRleHQvY3NzIj4KCS5zdDB7ZmlsbDojMkUyQTc0O30KCS5zdDF7ZmlsbDojRTYxRTU2O30KCS5zdDJ7ZmlsbDojRkZGRkZGO30KCS5zdDN7ZmlsbDpub25lO30KPC9zdHlsZT4KPGc+Cgk8Zz4KCQk8Zz4KCQkJPHBvbHlnb24gY2xhc3M9InN0MSIgcG9pbnRzPSI0MzkuMjEsMjM0Ljc0IDQ4MC40MiwyOTIuNzEgNTI0LjgzLDIzMC44IDQ4NS41NywxNzUuNTcgNDgxLjI3LDE3NS41NyAzOTcuMTUsMTc1LjU3IAoJCQkJMzkyLjg1LDE3NS41NyAzNDUuNSwyNDIuMTkgMzQ1LjUsMjQyLjE5IDI3Ni44OSwzMzguNTIgMjc2Ljg5LDMzOC4zIDIwNy4xNiw0MzYuNDYgMTcwLjQxLDQ4OC4wNiAyNTkuMjgsNDg4LjA2IDQyNS40MiwyNTQuMTMgCgkJCQkJCQkiLz4KCQkJPGc+CgkJCQk8cGF0aCBjbGFzcz0ic3QzIiBkPSJNNTc3Ljg5LDQzMS42OGw4LjEtMTEuNTJsLTguMTEsMTEuNTJDNTc3Ljg4LDQzMS42OCw1NzcuODksNDMxLjY4LDU3Ny44OSw0MzEuNjh6Ii8+CgkJCTwvZz4KCQkJPGc+CgkJCQk8cG9seWdvbiBjbGFzcz0ic3QxIiBwb2ludHM9IjE3MC40MSwyNTQuNzIgMTcwLjQxLDQwNy45NCAyMjQuOTksMzMxLjE1IAkJCQkiLz4KCQkJCTxwb2x5Z29uIGNsYXNzPSJzdDEiIHBvaW50cz0iMjU5LjI0LDE3NS44NiAxNzAuNDEsMTc1Ljg2IDI1My4wNSwyOTIuMDYgMjk3LjQzLDIyOS42MyAJCQkJIi8+CgkJCTwvZz4KCQkJPGc+CgkJCQk8cG9seWdvbiBjbGFzcz0ic3QxIiBwb2ludHM9IjcwMy44OSw0MTAuODUgNzAzLjg5LDI1Ny42MyA2NDkuMywzMzQuNDIgCQkJCSIvPgoJCQkJPHBvbHlnb24gY2xhc3M9InN0MSIgcG9pbnRzPSI2MTUuMDYsNDg4LjA2IDcwMy44OSw0ODguMDYgNjIxLjI1LDM3MS44NiA1NzYuODcsNDM0LjI5IAkJCQkiLz4KCQkJPC9nPgoJCQk8Zz4KCQkJCTxwb2x5Z29uIGNsYXNzPSJzdDEiIHBvaW50cz0iNjE1LjMsMTc1Ljg2IDQzNi42Myw0MjcuMjIgMzk1LjU0LDM2OS40MiAzNTEuNiw0MzEuOTggMzkxLjEzLDQ4OC4wNiA0ODEuODQsNDg4LjA2IAoJCQkJCTUxNC4yOCw0NDIuMzcgNjMwLjI0LDI3OS4yNCA2MzAuMjQsMjc5LjYzIDcwMi4zLDE3OC4yIDcwMy44OSwxNzUuODYgCQkJCSIvPgoJCQk8L2c+CgkJPC9nPgoJCTxnPgoJCQk8cGF0aCBjbGFzcz0ic3QyIiBkPSJNNDg0LjgxLDY1NC40NWMwLDkuNS0yLjU5LDE2Ljg0LTcuNzcsMjIuMDJjLTUuMTksNS4xOC0xMi4zMyw3Ljc3LTIxLjQ1LDcuNzdjLTkuMiwwLTE2LjM5LTIuNjMtMjEuNTctNy44OAoJCQkJYy01LjE5LTUuMjYtNy43OC0xMi41Ni03Ljc4LTIxLjl2LTk1LjMzSDM3My40djkyLjljMCw4LjQxLDEuNjQsMTguMDcsNC45MSwyOC45N2MyLjAzLDYuNzgsNS43OSwxMy4zNiwxMS4yOCwxOS43NAoJCQkJYzUuNDksNi4zOSwxMS41NSwxMS4zMSwxOC4xOCwxNC43OGM2LjYzLDMuNDcsMTQuODcsNS43OCwyNC43Myw2Ljk1YzkuODYsMS4xNywxOC45NiwxLjc1LDI3LjMsMS43NQoJCQkJYzE0LjQyLDAsMjYuNzctMS45MSwzNy4wNi01LjcyYzcuNC0yLjczLDE0LjQ4LTcuNDYsMjEuMjItMTQuMTlzMTEuNjktMTQuNiwxNC44NS0yMy42YzMuMTUtOC45OSw0LjczLTE4LjU1LDQuNzMtMjguNjh2LTkyLjkKCQkJCWgtNTIuODRWNjU0LjQ1eiIvPgoJCQk8cG9seWdvbiBjbGFzcz0ic3QyIiBwb2ludHM9IjIyMy4zNiw2MjMuODkgMjIzLjM2LDU1OS4xMiAxODUuNjEsNTU5LjEyIDE3MC40MSw1NTkuMTIgMTcwLjQxLDcyNC40MyAyMjMuMzYsNzI0LjQzIAoJCQkJMjIzLjM2LDY4OC42OCAyNTAuNzIsNjYwLjAyIDI4My43NCw3MjQuNDMgMzQ4LjM1LDcyNC40MyAyODYuNzIsNjIzLjgxIDM0OS4yNiw1NTkuMTIgMjc4LjgzLDU1OS4xMiAJCQkiLz4KCQkJPHBvbHlnb24gY2xhc3M9InN0MiIgcG9pbnRzPSI1NzIuOTYsNzI0LjQzIDYyNi4xNCw3MjQuNDMgNjI2LjE0LDY2MC40OCA2OTIuNTQsNjYwLjQ4IDY5Mi41NCw2MjUuODcgNjI2LjE0LDYyNS44NyAKCQkJCTYyNi4xNCw1OTUuOTUgNzAzLjg5LDU5NS45NSA3MDMuODksNTU5LjEyIDU3Mi45Niw1NTkuMTIgCQkJIi8+CgkJPC9nPgoJPC9nPgoJPGc+CgkJPHBhdGggY2xhc3M9InN0MiIgZD0iTTcxNC41OSw3MTYuOWMwLDExLjA0LTguNjcsMTkuNzEtMTkuOTQsMTkuNzFjLTExLjE2LDAtMjAuMDYtOC42Ny0yMC4wNi0xOS43MQoJCQljMC0xMC43OSw4LjktMTkuNDYsMjAuMDYtMTkuNDZDNzA1LjkzLDY5Ny40NCw3MTQuNTksNzA2LjExLDcxNC41OSw3MTYuOXogTTY3OS41OCw3MTYuOWMwLDguNjcsNi40MSwxNS41NSwxNS4xOSwxNS41NQoJCQljOC41NCwwLDE0LjgzLTYuODgsMTQuODMtMTUuNDNjMC04LjY2LTYuMjktMTUuNjctMTQuOTUtMTUuNjdDNjg1Ljk5LDcwMS4zNSw2NzkuNTgsNzA4LjM2LDY3OS41OCw3MTYuOXogTTY5MS41Niw3MjcuMTFoLTQuNQoJCQl2LTE5LjQ2YzEuNzgtMC4zNiw0LjI3LTAuNTksNy40Ny0wLjU5YzMuNjgsMCw1LjM0LDAuNTksNi43NiwxLjQyYzEuMDcsMC44MywxLjksMi4zOCwxLjksNC4yN2MwLDIuMTQtMS42NiwzLjgtNC4wNCw0LjUxdjAuMjQKCQkJYzEuOSwwLjcxLDIuOTcsMi4xNCwzLjU3LDQuNzVjMC41OSwyLjk3LDAuOTUsNC4xNiwxLjQyLDQuODZoLTQuODZjLTAuNi0wLjcxLTAuOTYtMi40OS0xLjU1LTQuNzUKCQkJYy0wLjM2LTIuMTQtMS41NS0zLjA4LTQuMDQtMy4wOGgtMi4xNFY3MjcuMTF6IE02OTEuNjksNzE2LjA3aDIuMTRjMi40OCwwLDQuNS0wLjgzLDQuNS0yLjg1YzAtMS43OC0xLjMtMi45Ny00LjE2LTIuOTcKCQkJYy0xLjE4LDAtMi4wMSwwLjEzLTIuNDgsMC4yNFY3MTYuMDd6Ii8+Cgk8L2c+CjwvZz4KPC9zdmc+Cg==" alt="StampaoKuf">
+    <div class="hdr-sep"></div>
+    <div class="hdr-sub">Suite · Herramientas</div>
+  </div>
+  <div class="hdr-badge">v1.0 · 2025</div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">StampaoKuf · Punta Arenas</div>
+  <h1 class="hero-title">Herramientas de<br><span>gestión y producción</span></h1>
+  <p class="hero-desc">Suite interna para cotizar, gestionar pedidos y controlar inventario. Abre cada herramienta directamente desde aquí.</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- TOOLS -->
+<section class="tools-section">
+  <div class="section-label">Herramientas disponibles</div>
+  <div class="cards-grid">
+
+    <!-- COTIZADOR -->
+    <a class="tool-card" href="StampaoKuf_Cotizador.html">
+      <div class="card-accent ac-mg"></div>
+      <div class="card-body">
+        <div class="card-icon-wrap ic-mg"><i class="ti ti-receipt" aria-hidden="true"></i></div>
+        <div class="card-title">Cotizador</div>
+        <div class="card-desc">Genera cotizaciones profesionales con cálculo automático de IVA, descuentos, tabla de precios por producto y zona, y exportación a PDF lista para enviar al cliente.</div>
+        <div class="card-tags">
+          <span class="tag tag-mg">Estampado</span>
+          <span class="tag tag-mg">DTF · Vinilo</span>
+          <span class="tag tag-gray">PDF</span>
+          <span class="tag tag-gray">IVA incluido</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="card-link">Abrir cotizador <i class="ti ti-arrow-right card-arrow" aria-hidden="true"></i></span>
+        <span class="card-status st-ready">Listo</span>
+      </div>
+    </a>
+
+    <!-- TABLERO -->
+    <a class="tool-card" href="StampaoKuf_Tablero_Pedidos.html">
+      <div class="card-accent ac-blue"></div>
+      <div class="card-body">
+        <div class="card-icon-wrap ic-blue"><i class="ti ti-layout-kanban" aria-hidden="true"></i></div>
+        <div class="card-title">Tablero de Pedidos</div>
+        <div class="card-desc">Kanban visual con 4 estados de producción. Cambia el estado con un clic, alertas automáticas por fecha límite en verde, amarillo y rojo, y drag & drop entre columnas.</div>
+        <div class="card-tags">
+          <span class="tag tag-blue">Kanban</span>
+          <span class="tag tag-blue">Producción</span>
+          <span class="tag tag-gray">Alertas</span>
+          <span class="tag tag-gray">Fechas</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="card-link">Abrir tablero <i class="ti ti-arrow-right card-arrow" aria-hidden="true"></i></span>
+        <span class="card-status st-ready">Listo</span>
+      </div>
+    </a>
+
+    <!-- INVENTARIO -->
+    <a class="tool-card" href="StampaoKuf_Inventario.html">
+      <div class="card-accent ac-teal"></div>
+      <div class="card-body">
+        <div class="card-icon-wrap ic-teal"><i class="ti ti-package" aria-hidden="true"></i></div>
+        <div class="card-title">Inventario</div>
+        <div class="card-desc">Control de stock en tiempo real con sincronización multi-dispositivo vía Supabase. Registro de ventas, descuento automático de stock, alertas de quiebre y dashboard de métricas.</div>
+        <div class="card-tags">
+          <span class="tag tag-teal">Stock</span>
+          <span class="tag tag-teal">Ventas</span>
+          <span class="tag tag-gray">Supabase</span>
+          <span class="tag tag-gray">Multi-equipo</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="card-link">Abrir inventario <i class="ti ti-arrow-right card-arrow" aria-hidden="true"></i></span>
+        <span class="card-status st-ready">Listo</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-brand">
+    <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDI4LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkNhcGFfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiCgkgdmlld0JveD0iMCAwIDkwMCA5MDAiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDkwMCA5MDA7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPHN0eWxlIHR5cGU9InRleHQvY3NzIj4KCS5zdDB7ZmlsbDojMkUyQTc0O30KCS5zdDF7ZmlsbDojRTYxRTU2O30KCS5zdDJ7ZmlsbDojRkZGRkZGO30KCS5zdDN7ZmlsbDpub25lO30KPC9zdHlsZT4KPGc+Cgk8Zz4KCQk8Zz4KCQkJPHBvbHlnb24gY2xhc3M9InN0MSIgcG9pbnRzPSI0MzkuMjEsMjM0Ljc0IDQ4MC40MiwyOTIuNzEgNTI0LjgzLDIzMC44IDQ4NS41NywxNzUuNTcgNDgxLjI3LDE3NS41NyAzOTcuMTUsMTc1LjU3IAoJCQkJMzkyLjg1LDE3NS41NyAzNDUuNSwyNDIuMTkgMzQ1LjUsMjQyLjE5IDI3Ni44OSwzMzguNTIgMjc2Ljg5LDMzOC4zIDIwNy4xNiw0MzYuNDYgMTcwLjQxLDQ4OC4wNiAyNTkuMjgsNDg4LjA2IDQyNS40MiwyNTQuMTMgCgkJCQkJCQkiLz4KCQkJPGc+CgkJCQk8cGF0aCBjbGFzcz0ic3QzIiBkPSJNNTc3Ljg5LDQzMS42OGw4LjEtMTEuNTJsLTguMTEsMTEuNTJDNTc3Ljg4LDQzMS42OCw1NzcuODksNDMxLjY4LDU3Ny44OSw0MzEuNjh6Ii8+CgkJCTwvZz4KCQkJPGc+CgkJCQk8cG9seWdvbiBjbGFzcz0ic3QxIiBwb2ludHM9IjE3MC40MSwyNTQuNzIgMTcwLjQxLDQwNy45NCAyMjQuOTksMzMxLjE1IAkJCQkiLz4KCQkJCTxwb2x5Z29uIGNsYXNzPSJzdDEiIHBvaW50cz0iMjU5LjI0LDE3NS44NiAxNzAuNDEsMTc1Ljg2IDI1My4wNSwyOTIuMDYgMjk3LjQzLDIyOS42MyAJCQkJIi8+CgkJCTwvZz4KCQkJPGc+CgkJCQk8cG9seWdvbiBjbGFzcz0ic3QxIiBwb2ludHM9IjcwMy44OSw0MTAuODUgNzAzLjg5LDI1Ny42MyA2NDkuMywzMzQuNDIgCQkJCSIvPgoJCQkJPHBvbHlnb24gY2xhc3M9InN0MSIgcG9pbnRzPSI2MTUuMDYsNDg4LjA2IDcwMy44OSw0ODguMDYgNjIxLjI1LDM3MS44NiA1NzYuODcsNDM0LjI5IAkJCQkiLz4KCQkJPC9nPgoJCQk8Zz4KCQkJCTxwb2x5Z29uIGNsYXNzPSJzdDEiIHBvaW50cz0iNjE1LjMsMTc1Ljg2IDQzNi42Myw0MjcuMjIgMzk1LjU0LDM2OS40MiAzNTEuNiw0MzEuOTggMzkxLjEzLDQ4OC4wNiA0ODEuODQsNDg4LjA2IAoJCQkJCTUxNC4yOCw0NDIuMzcgNjMwLjI0LDI3OS4yNCA2MzAuMjQsMjc5LjYzIDcwMi4zLDE3OC4yIDcwMy44OSwxNzUuODYgCQkJCSIvPgoJCQk8L2c+CgkJPC9nPgoJCTxnPgoJCQk8cGF0aCBjbGFzcz0ic3QyIiBkPSJNNDg0LjgxLDY1NC40NWMwLDkuNS0yLjU5LDE2Ljg0LTcuNzcsMjIuMDJjLTUuMTksNS4xOC0xMi4zMyw3Ljc3LTIxLjQ1LDcuNzdjLTkuMiwwLTE2LjM5LTIuNjMtMjEuNTctNy44OAoJCQkJYy01LjE5LTUuMjYtNy43OC0xMi41Ni03Ljc4LTIxLjl2LTk1LjMzSDM3My40djkyLjljMCw4LjQxLDEuNjQsMTguMDcsNC45MSwyOC45N2MyLjAzLDYuNzgsNS43OSwxMy4zNiwxMS4yOCwxOS43NAoJCQkJYzUuNDksNi4zOSwxMS41NSwxMS4zMSwxOC4xOCwxNC43OGM2LjYzLDMuNDcsMTQuODcsNS43OCwyNC43Myw2Ljk1YzkuODYsMS4xNywxOC45NiwxLjc1LDI3LjMsMS43NQoJCQkJYzE0LjQyLDAsMjYuNzctMS45MSwzNy4wNi01LjcyYzcuNC0yLjczLDE0LjQ4LTcuNDYsMjEuMjItMTQuMTlzMTEuNjktMTQuNiwxNC44NS0yMy42YzMuMTUtOC45OSw0LjczLTE4LjU1LDQuNzMtMjguNjh2LTkyLjkKCQkJCWgtNTIuODRWNjU0LjQ1eiIvPgoJCQk8cG9seWdvbiBjbGFzcz0ic3QyIiBwb2ludHM9IjIyMy4zNiw2MjMuODkgMjIzLjM2LDU1OS4xMiAxODUuNjEsNTU5LjEyIDE3MC40MSw1NTkuMTIgMTcwLjQxLDcyNC40MyAyMjMuMzYsNzI0LjQzIAoJCQkJMjIzLjM2LDY4OC42OCAyNTAuNzIsNjYwLjAyIDI4My43NCw3MjQuNDMgMzQ4LjM1LDcyNC40MyAyODYuNzIsNjIzLjgxIDM0OS4yNiw1NTkuMTIgMjc4LjgzLDU1OS4xMiAJCQkiLz4KCQkJPHBvbHlnb24gY2xhc3M9InN0MiIgcG9pbnRzPSI1NzIuOTYsNzI0LjQzIDYyNi4xNCw3MjQuNDMgNjI2LjE0LDY2MC40OCA2OTIuNTQsNjYwLjQ4IDY5Mi41NCw2MjUuODcgNjI2LjE0LDYyNS44NyAKCQkJCTYyNi4xNCw1OTUuOTUgNzAzLjg5LDU5NS45NSA3MDMuODksNTU5LjEyIDU3Mi45Niw1NTkuMTIgCQkJIi8+CgkJPC9nPgoJPC9nPgoJPGc+CgkJPHBhdGggY2xhc3M9InN0MiIgZD0iTTcxNC41OSw3MTYuOWMwLDExLjA0LTguNjcsMTkuNzEtMTkuOTQsMTkuNzFjLTExLjE2LDAtMjAuMDYtOC42Ny0yMC4wNi0xOS43MQoJCQljMC0xMC43OSw4LjktMTkuNDYsMjAuMDYtMTkuNDZDNzA1LjkzLDY5Ny40NCw3MTQuNTksNzA2LjExLDcxNC41OSw3MTYuOXogTTY3OS41OCw3MTYuOWMwLDguNjcsNi40MSwxNS41NSwxNS4xOSwxNS41NQoJCQljOC41NCwwLDE0LjgzLTYuODgsMTQuODMtMTUuNDNjMC04LjY2LTYuMjktMTUuNjctMTQuOTUtMTUuNjdDNjg1Ljk5LDcwMS4zNSw2NzkuNTgsNzA4LjM2LDY3OS41OCw3MTYuOXogTTY5MS41Niw3MjcuMTFoLTQuNQoJCQl2LTE5LjQ2YzEuNzgtMC4zNiw0LjI3LTAuNTksNy40Ny0wLjU5YzMuNjgsMCw1LjM0LDAuNTksNi43NiwxLjQyYzEuMDcsMC44MywxLjksMi4zOCwxLjksNC4yN2MwLDIuMTQtMS42NiwzLjgtNC4wNCw0LjUxdjAuMjQKCQkJYzEuOSwwLjcxLDIuOTcsMi4xNCwzLjU3LDQuNzVjMC41OSwyLjk3LDAuOTUsNC4xNiwxLjQyLDQuODZoLTQuODZjLTAuNi0wLjcxLTAuOTYtMi40OS0xLjU1LTQuNzUKCQkJYy0wLjM2LTIuMTQtMS41NS0zLjA4LTQuMDQtMy4wOGgtMi4xNFY3MjcuMTF6IE02OTEuNjksNzE2LjA3aDIuMTRjMi40OCwwLDQuNS0wLjgzLDQuNS0yLjg1YzAtMS43OC0xLjMtMi45Ny00LjE2LTIuOTcKCQkJYy0xLjE4LDAtMi4wMSwwLjEzLTIuNDgsMC4yNFY3MTYuMDd6Ii8+Cgk8L2c+CjwvZz4KPC9zdmc+Cg==" alt="StampaoKuf">
+    <span class="footer-copy">© 2025 StampaoKuf · Diseño Gráfico Claudio Ponce EIRL · Punta Arenas</span>
+  </div>
+  <nav class="footer-links" aria-label="Links">
+    <a class="footer-link" href="mailto:contacto@kuf.cl">contacto@kuf.cl</a>
+    <a class="footer-link" href="https://github.com" target="_blank">GitHub</a>
+  </nav>
+</footer>
+
+</body>
+</html>
