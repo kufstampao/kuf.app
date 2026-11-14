@@ -43,7 +43,7 @@ html,body{min-height:100vh;font-family:var(--body);background:var(--bg);color:va
 .tools-section{padding:48px 32px 64px}
 .section-label{font-family:var(--mono);font-size:10px;font-weight:700;color:var(--mu2);letter-spacing:.16em;text-transform:uppercase;margin-bottom:28px;display:flex;align-items:center;gap:10px}
 .section-label::after{content:'';flex:1;height:0.5px;background:var(--br)}
-.cards-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
 
 /* ── TOOL CARD ── */
 .tool-card{background:var(--s1);border:0.5px solid var(--br);border-radius:var(--rl);overflow:hidden;transition:border-color .2s,transform .15s;display:flex;flex-direction:column;text-decoration:none;cursor:pointer;position:relative}
@@ -53,11 +53,13 @@ html,body{min-height:100vh;font-family:var(--body);background:var(--bg);color:va
 .ac-mg{background:linear-gradient(90deg,var(--mg),#b5103f)}
 .ac-blue{background:linear-gradient(90deg,#2b5fcc,#185fa5)}
 .ac-teal{background:linear-gradient(90deg,#0f9e75,#0a6e52)}
+.ac-violet{background:linear-gradient(90deg,#8b5cf6,#5b3fc4)}
 .card-body{padding:22px 22px 18px;flex:1;display:flex;flex-direction:column;gap:12px}
 .card-icon-wrap{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px}
 .ic-mg{background:rgba(232,25,90,.12);color:var(--mg)}
 .ic-blue{background:rgba(43,95,204,.15);color:#5b8cf5}
 .ic-teal{background:rgba(15,158,117,.12);color:#2dd4a0}
+.ic-violet{background:rgba(139,92,246,.14);color:#a78bfa}
 .card-title{font-size:17px;font-weight:700;color:var(--tx);line-height:1.2}
 .card-desc{font-size:13px;color:var(--tx3);line-height:1.6;flex:1}
 .card-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
@@ -65,6 +67,7 @@ html,body{min-height:100vh;font-family:var(--body);background:var(--bg);color:va
 .tag-mg{background:rgba(232,25,90,.1);color:var(--mg)}
 .tag-blue{background:rgba(43,95,204,.12);color:#7aaaf5}
 .tag-teal{background:rgba(15,158,117,.1);color:#2dd4a0}
+.tag-violet{background:rgba(139,92,246,.12);color:#b9a2fb}
 .tag-gray{background:rgba(58,54,104,.5);color:var(--tx3)}
 .card-footer{padding:14px 22px 18px;border-top:0.5px solid var(--br);display:flex;align-items:center;justify-content:space-between}
 .card-link{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--tx3);letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center;gap:7px;text-decoration:none;transition:color .15s}
@@ -109,7 +112,7 @@ html,body{min-height:100vh;font-family:var(--body);background:var(--bg);color:va
 <section class="hero">
   <div class="hero-eyebrow">StampaoKuf · Punta Arenas</div>
   <h1 class="hero-title">Herramientas de<br><span>gestión y producción</span></h1>
-  <p class="hero-desc">Suite interna para cotizar, gestionar pedidos y controlar inventario. Abre cada herramienta directamente desde aquí.</p>
+  <p class="hero-desc">Suite interna para cotizar, agendar pedidos, gestionar la producción y controlar inventario. Abre cada herramienta directamente desde aquí.</p>
 </section>
 
 <div class="divider"></div>
@@ -136,6 +139,26 @@ html,body{min-height:100vh;font-family:var(--body);background:var(--bg);color:va
       <div class="card-footer">
         <span class="card-link">Abrir cotizador <i class="ti ti-arrow-right card-arrow" aria-hidden="true"></i></span>
         <span class="card-status st-ready">Listo</span>
+      </div>
+    </a>
+
+    <!-- AGENDA DE PEDIDOS -->
+    <a class="tool-card" href="agenda-pedidos.html">
+      <div class="card-accent ac-violet"></div>
+      <div class="card-body">
+        <div class="card-icon-wrap ic-violet"><i class="ti ti-calendar-event" aria-hidden="true"></i></div>
+        <div class="card-title">Agenda de Pedidos</div>
+        <div class="card-desc">Ingresa pedidos desde el celular o el computador, con tallas por ítem y total automático. Sigue cada pedido como terminado, pagado y entregado, y imprime la orden de trabajo con el mockup.</div>
+        <div class="card-tags">
+          <span class="tag tag-violet">Pedidos</span>
+          <span class="tag tag-violet">Fechas de entrega</span>
+          <span class="tag tag-gray">Mockup</span>
+          <span class="tag tag-gray">Impresión</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="card-link">Abrir agenda <i class="ti ti-arrow-right card-arrow" aria-hidden="true"></i></span>
+        <span class="card-status st-beta">Nuevo</span>
       </div>
     </a>
 
