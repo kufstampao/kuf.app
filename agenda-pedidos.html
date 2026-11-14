@@ -89,6 +89,7 @@ form{max-width:640px;margin:auto;padding:14px;display:grid;grid-template-columns
 label{font-size:13px;color:var(--mu);display:block;margin-bottom:4px}
 .f{grid-column:1/-1}
 .sec{grid-column:1/-1;font-weight:700;font-size:16px;margin-top:6px}
+.ocb{display:inline-block;margin-left:6px;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:700;background:rgba(139,92,246,.14);color:var(--vi);border:1px solid rgba(139,92,246,.4)}
 .chk{display:flex;align-items:center;gap:10px;grid-column:1/-1}
 .chk input{width:22px;height:22px}.chk label{margin:0;font-size:16px;color:var(--tx)}
 #items{grid-column:1/-1;display:flex;flex-direction:column;gap:10px}
@@ -167,6 +168,7 @@ label{font-size:13px;color:var(--mu);display:block;margin-bottom:4px}
     <div><label for="telefono">Teléfono</label><input id="telefono" type="tel" inputmode="tel" placeholder="9 1234 5678"></div>
     <div><label for="documento">Boleta o factura</label>
       <select id="documento"><option>Boleta</option><option>Factura</option><option>Sin documento</option></select></div>
+    <div class="chk"><input id="oc" type="checkbox"><label for="oc">Orden de compra (pago a 30 días)</label></div>
 
     <div class="sec">Productos</div>
     <div id="items"></div>
@@ -293,12 +295,13 @@ function card(p){
   const e=estadoEntrega(p),s=saldo(p);
   return `<div class="c ${e.c}${OPEN.has(p.id)?' open':''}" data-n="${p.id}" style="--dc:${e.col};border-left-color:${e.col}">
     <div class="row"><span class="name">${esc(p.nombre)}</span><span class="code">${cod(p)}</span></div>
-    <div class="sub">${esc(p.pedido)}</div>
+    <div class="sub">${esc(p.pedido)}${p.orden_compra?' <span class="ocb">OC · pago a 30 días</span>':''}</div>
     <div class="row" style="margin-top:8px;align-items:center"><div class="ent"><span class="dot" style="background:${e.col}"></span><div><div class="ef">Entrega: ${esc(fFull(p.fecha_entrega))}</div><div class="er">${esc(e.t)}</div></div></div><span class="saldo ${s<=0?'zero':''}">${s<=0?'Pagado':'Saldo '+clp(s)}</span></div>
     <div class="det">
       <dl>
         <dt>Teléfono</dt><dd>${esc(p.telefono)||'-'}</dd>
         <dt>Documento</dt><dd>${esc(p.documento)}</dd>
+        ${p.orden_compra?'<dt>Orden de compra</dt><dd>Sí, pago a 30 días</dd>':''}
         <dt>Estampados</dt><dd>${p.estampados??0}</dd>
         <dt>Descripción</dt><dd>${esc(p.descripcion)||'-'}</dd>
         <dt>Emitido</dt><dd>${fmtF(p.fecha_emision)}</dd>
@@ -339,7 +342,7 @@ function whatsapp(p){
   if(d.length===8)d='569'+d;else if(d.length===9)d='56'+d;
   if(!d){aviso('El pedido no tiene teléfono.',true);return}
   const s=saldo(p);
-    const t=`¡Hola, ${p.nombre}!\n\n¡Tenemos buenas noticias! Tu pedido ${p.pedido} ya está listo para retirar en KUF Personalización Textil.\n\nHorario de atención:\nLunes a viernes\n09:00 a 14:00 hrs.\n15:00 a 18:00 hrs.\n\n`+(s>0?`Te recordamos que, al momento de retirar tu pedido, se debe cancelar el saldo pendiente.\n\n`:'')+`¡Muchas gracias por confiar en KUF!`;
+  const t=`¡Hola, ${p.nombre}!\n\n¡Tenemos buenas noticias! Tu pedido ${p.pedido} ya está listo para retirar en KUF Personalización Textil.\n\nHorario de atención:\nLunes a viernes\n09:00 a 14:00 hrs.\n15:00 a 18:00 hrs.\n\n`+(s>0?`Te recordamos que, al momento de retirar tu pedido, se debe cancelar el saldo pendiente.\n\n`:'')+`¡Muchas gracias por confiar en KUF!`;
   window.open(`https://wa.me/${d}?text=${encodeURIComponent(t)}`,'_blank');
 }
 
@@ -358,7 +361,7 @@ async function imprimir(p){
       <div class="pc"><b>${cod(p)}</b><div>Estado: ${esc(p.estado||'Pendiente')}</div></div></div>
     <table class="info">
       <tr><td>Cliente</td><td>${esc(p.nombre)}</td><td>Teléfono</td><td>${esc(p.telefono)||'-'}</td></tr>
-      <tr><td>Pedido</td><td>${esc(p.pedido)}</td><td>Documento</td><td>${esc(p.documento)}</td></tr>
+      <tr><td>Pedido</td><td>${esc(p.pedido)}</td><td>Documento</td><td>${esc(p.documento)}${p.orden_compra?' (Orden de compra, pago a 30 días)':''}</td></tr>
       <tr><td>Emisión</td><td>${fF(p.fecha_emision)}</td><td>Entrega</td><td><b>${cap(fFull(p.fecha_entrega))}</b></td></tr>
     </table>
     <h2>Detalle de producción</h2>
@@ -471,7 +474,7 @@ function abrir(p){
   if(!p){ITEMS=[nuevoItem()];$('emision').value=hoy();$('documento').value='Boleta';$('dtipo').value='monto';$('dvalor').value=0;$('iva').checked=true;$('abono').value=0}
   else if(p.items&&p.items.length){ITEMS=p.items.map(norm);$('dtipo').value=p.desc_tipo||'monto';$('dvalor').value=p.desc_valor||0;$('iva').checked=p.iva!==false;$('abono').value=p.abono||0}
   else{ITEMS=[norm({p:'Otro / personalizado',z:1,c:1,u:p.total||0,t:p.talla||'',k:p.color||''})];$('dtipo').value='monto';$('dvalor').value=p.descuento||0;$('iva').checked=false;$('abono').value=p.abono||0}
-  $('ptotal').checked=false;
+  $('ptotal').checked=false;$('oc').checked=!!(p&&p.orden_compra);
   MOCKS=p&&p.mockups?p.mockups.map(u=>({id:u,prev:u})):[];renderMocks();
   renderItems();
   const r=totales();
@@ -490,7 +493,7 @@ $('fm').addEventListener('submit',async ev=>{
   const uniq=k=>[...new Set(items.map(x=>(x[k]||'').trim()).filter(Boolean))].join(', ');
   const o={
     nombre:$('nombre').value.trim(),pedido:$('pedido').value.trim(),telefono:$('telefono').value.trim(),
-    documento:$('documento').value,descripcion:$('descripcion').value.trim(),
+    documento:$('documento').value,orden_compra:$('oc').checked,descripcion:$('descripcion').value.trim(),
     fecha_emision:$('emision').value||hoy(),fecha_entrega:$('entrega').value,
     items,desc_tipo:$('dtipo').value,desc_valor:num('dvalor'),iva:$('iva').checked,
     descuento:r.d,total:r.total,abono:num('abono'),
