@@ -135,7 +135,7 @@ label{font-size:13px;color:var(--mu);display:block;margin-bottom:4px}
   #pr .big td{font-size:13pt;font-weight:700}
   #pr h2{font-size:12pt;margin:12px 0 6px;color:#2e2a74}
   #pr .chk2{display:flex;flex-wrap:wrap;gap:6px 26px;font-size:11pt;margin-bottom:14px}
-  #pr .firmas{display:flex;gap:40px;margin-top:34px}
+  #pr .firmas{display:flex;gap:22px;margin-top:46px;break-inside:avoid}
   #pr .firmas div{flex:1;border-top:1px solid #000;padding-top:4px;font-size:10pt;text-align:center}
   #pr tr{break-inside:avoid}
 }
@@ -196,7 +196,7 @@ label{font-size:13px;color:var(--mu);display:block;margin-bottom:4px}
 <script>
 /* Conexión a Supabase: pega aquí la anon key (la misma del Inventario) */
 const SB_URL='https://gappwzovrvedtetrhizb.supabase.co';
-const SB_KEY='sb_publishable_VWAHi4tdiQO02T1idV1BGA_emxdOKkD';
+const SB_KEY='PEGA_AQUI_TU_ANON_KEY';
 /* Las claves nuevas (sb_publishable_...) van solo en apikey; las antiguas (eyJ...) también como Bearer */
 const AUTH=SB_KEY.startsWith('eyJ')?{Authorization:'Bearer '+SB_KEY}:{};
 const H={apikey:SB_KEY,...AUTH,'Content-Type':'application/json'};
@@ -339,7 +339,7 @@ function whatsapp(p){
   if(d.length===8)d='569'+d;else if(d.length===9)d='56'+d;
   if(!d){aviso('El pedido no tiene teléfono.',true);return}
   const s=saldo(p);
-  const t=`Hola ${p.nombre}, tu pedido “${p.pedido}” ya está listo para retiro en KUF Personalización Textil.`+(s>0?` El saldo pendiente es ${clp(s)}.`:'');
+  const t=`¡Hola, ${p.nombre}! 👋\n\n¡Tenemos buenas noticias! Tu pedido ${p.pedido} ya está listo para retirar en KUF Personalización Textil. 🎉\n\n📍 Horario de atención:\nLunes a viernes\n🕘 09:00 a 14:00 hrs.\n🕒 15:00 a 18:00 hrs.\n\n`+(s>0?`Te recordamos que, al momento de retirar tu pedido, se debe cancelar el saldo pendiente.\n\n`:'')+`¡Muchas gracias por confiar en KUF! 💙`;
   window.open(`https://wa.me/${d}?text=${encodeURIComponent(t)}`,'_blank');
 }
 
@@ -369,7 +369,8 @@ async function imprimir(p){
     <div class="mid"><div class="mkcol">${(p.mockups&&p.mockups.length)?`<h2 style="margin-top:0">Mockup</h2><div class="mkp">${p.mockups.map(u=>`<img src="${mk(u)}" alt="Mockup">`).join('')}</div>`:''}</div></div>
     <h2>Control de producción</h2>
     <div class="chk2"><span>☐ Diseño aprobado</span><span>☐ Archivo listo</span><span>☐ Estampado</span><span>☐ Control de calidad</span><span>☐ Entregado</span></div>
-    <div class="firmas"><div>Recibe conforme (nombre y firma)</div><div>Fecha de retiro</div></div>`;
+    <h2>Recibí conforme</h2>
+    <div class="firmas"><div>Nombre</div><div>RUT</div><div>Firma</div><div>Fecha de retiro</div></div>`;
   document.title=`${cod(p)} ${p.nombre}`;
   await Promise.all([...$('pr').querySelectorAll('img')].map(i=>i.complete?1:new Promise(r=>{i.onload=i.onerror=r})));
   try{window.print()}catch(e){aviso('No se pudo abrir la impresión. Abre la agenda en una pestaña completa e inténtalo de nuevo.',true)}
