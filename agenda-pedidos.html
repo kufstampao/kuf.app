@@ -339,7 +339,7 @@ function whatsapp(p){
   if(d.length===8)d='569'+d;else if(d.length===9)d='56'+d;
   if(!d){aviso('El pedido no tiene teléfono.',true);return}
   const s=saldo(p);
-  const t=`¡Hola, ${p.nombre}! 👋\n\n¡Tenemos buenas noticias! Tu pedido ${p.pedido} ya está listo para retirar en KUF Personalización Textil. 🎉\n\n📍 Horario de atención:\nLunes a viernes\n🕘 09:00 a 14:00 hrs.\n🕒 15:00 a 18:00 hrs.\n\n`+(s>0?`Te recordamos que, al momento de retirar tu pedido, se debe cancelar el saldo pendiente.\n\n`:'')+`¡Muchas gracias por confiar en KUF! 💙`;
+    const t=`¡Hola, ${p.nombre}!\n\n¡Tenemos buenas noticias! Tu pedido ${p.pedido} ya está listo para retirar en KUF Personalización Textil.\n\nHorario de atención:\nLunes a viernes\n09:00 a 14:00 hrs.\n15:00 a 18:00 hrs.\n\n`+(s>0?`Te recordamos que, al momento de retirar tu pedido, se debe cancelar el saldo pendiente.\n\n`:'')+`¡Muchas gracias por confiar en KUF!`;
   window.open(`https://wa.me/${d}?text=${encodeURIComponent(t)}`,'_blank');
 }
 
