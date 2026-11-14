@@ -4,24 +4,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>StampaoKuf · Inventario</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#0a0a0a;--s1:#111;--s2:#1a1a1a;--s3:#222;--br:#2a2a2a;--br2:#333;--navy:#2e2a74;--mag:#e61e56;--mag2:#ff3d6e;--tx:#f0f0f0;--mu:#888;--ok:#44cc88;--wn:#ffaa00;--er:#ff4444;--r:10px;--mono:'Space Mono',monospace;--body:'DM Sans',sans-serif}
-body{background:var(--bg);color:var(--tx);font-family:var(--body);font-size:14px;min-height:100vh}
+:root{--bg:#f4f4f9;--s1:#fff;--s2:#f4f4f9;--s3:#e9e8f5;--br:#dedcec;--br2:#e8e7f3;--navy:#2e2a74;--az:#2e2a74;--mag:#e61e56;--mag2:#c8174a;--tx:#1b1a35;--mu:#67668a;--ok:#16895a;--wn:#d98a00;--er:#d92d20;--r:10px;--mono:Ubuntu,system-ui,sans-serif;--body:Ubuntu,system-ui,sans-serif}
+@media(prefers-color-scheme:dark){:root{color-scheme:dark;--bg:#121127;--s1:#1c1b3a;--s2:#262550;--s3:#2f2e60;--br:#33325c;--br2:#2b2a52;--az:#8c86ff;--mag2:#ff4a7c;--tx:#f0efff;--mu:#a5a4c8;--ok:#3ddc97;--wn:#ffb020;--er:#ff7b72}}
+body{background:var(--bg);color:var(--tx);font-family:var(--body);font-size:15px;min-height:100vh}
 button,input,select{font-family:var(--body)}
-.hdr{background:#0f0f0f;border-bottom:2px solid var(--mag);padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:58px;position:sticky;top:0;z-index:50}
+.hdr{background:#2e2a74;border-bottom:3px solid var(--mag);padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:58px;position:sticky;top:0;z-index:50}
 .hdr-logo{display:flex;align-items:center;gap:12px}
 .volver{color:#fff;text-decoration:none;font-size:13px;font-weight:600;font-family:var(--body);background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);padding:7px 12px;border-radius:10px;white-space:nowrap}
 .volver:hover{background:rgba(255,255,255,.24)}
-.hdr-logo img{height:36px;width:auto}
+.hdr-logo img{height:36px;width:auto;background:#fff;border-radius:8px;padding:3px 6px}
 .hdr-sep{width:1px;height:28px;background:rgba(255,255,255,.15)}
-.hdr-title{font-family:var(--mono);font-size:11px;color:rgba(255,255,255,.4);letter-spacing:.1em;text-transform:uppercase}
+.hdr-title{font-family:var(--mono);font-size:11px;color:rgba(255,255,255,.8);letter-spacing:.08em;text-transform:uppercase;font-weight:500}
 .dot-live{width:7px;height:7px;border-radius:50%;background:var(--ok);animation:pulse 2s infinite;display:inline-block;margin-right:5px}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-.nav{display:flex;gap:2px;padding:0 16px;background:#0f0f0f;border-bottom:1px solid var(--br);overflow-x:auto}
+.nav{display:flex;gap:2px;padding:0 16px;background:var(--s1);border-bottom:1px solid var(--br);overflow-x:auto}
 .nav button{font-family:var(--mono);font-size:12px;padding:12px 14px;cursor:pointer;border:none;background:none;color:var(--mu);border-bottom:2px solid transparent;white-space:nowrap;transition:all .15s}
-.nav button.on{color:#fff;border-bottom-color:var(--mag)}
+.nav button.on{color:var(--az);font-weight:700;border-bottom-color:var(--mag)}
 .nav button:hover:not(.on){color:var(--tx)}
 #nb{background:var(--er);color:#fff;font-size:10px;padding:1px 5px;border-radius:99px;margin-left:4px;vertical-align:middle;display:none}
 .pg{padding:20px 16px;max-width:960px;margin:0 auto;display:none}
@@ -36,7 +37,7 @@ button,input,select{font-family:var(--body)}
 .fg{margin-bottom:10px}
 .fg label{font-size:11px;color:var(--mu);display:block;margin-bottom:5px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.04em}
 .fg input,.fg select{width:100%;background:var(--s2);border:1px solid var(--br);border-radius:7px;padding:9px 12px;color:var(--tx);font-size:13px;outline:none;transition:border-color .2s}
-.fg input:focus,.fg select:focus{border-color:var(--mag);background:var(--s3)}
+.fg input:focus,.fg select:focus{border-color:var(--mag);background:var(--s1)}
 .fg select option{background:var(--s2)}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
@@ -47,7 +48,7 @@ button,input,select{font-family:var(--body)}
 .p:hover{background:var(--mag2)!important;border-color:var(--mag2)!important}
 .d{border-color:var(--er)!important;color:var(--er)!important}
 .d:hover{background:#ff444415!important}
-.o{border-color:var(--navy)!important;color:#a090ff!important}
+.o{border-color:var(--navy)!important;color:var(--az)!important}
 .o:hover{background:#2e2a7420!important}
 .sm{padding:5px 10px!important;font-size:11px!important}
 .tw{overflow-x:auto}
@@ -57,18 +58,18 @@ td{padding:8px 10px;border-bottom:1px solid var(--br2);vertical-align:middle}
 tr:last-child td{border-bottom:none}
 tr:hover td{background:var(--s2)}
 .bx{display:inline-block;font-size:11px;font-family:var(--mono);padding:3px 8px;border-radius:99px;font-weight:700}
-.bok{background:#44cc8822;color:var(--ok);border:1px solid #44cc8844}
-.blow{background:#ffaa0022;color:var(--wn);border:1px solid #ffaa0044}
-.bout{background:#ff444422;color:var(--er);border:1px solid #ff444440}
+.bok{background:color-mix(in srgb,var(--ok) 14%,transparent);color:var(--ok);border:1px solid color-mix(in srgb,var(--ok) 40%,transparent)}
+.blow{background:color-mix(in srgb,var(--wn) 14%,transparent);color:var(--wn);border:1px solid color-mix(in srgb,var(--wn) 40%,transparent)}
+.bout{background:color-mix(in srgb,var(--er) 14%,transparent);color:var(--er);border:1px solid color-mix(in srgb,var(--er) 40%,transparent)}
 .sc{display:flex;align-items:center;gap:5px}
 .sc button{width:26px;height:26px;border:1px solid var(--br);border-radius:5px;background:var(--s2);color:var(--tx);cursor:pointer;font-size:15px;line-height:1;transition:all .15s}
 .sc button:hover{border-color:var(--mag);color:var(--mag)}
 .sn{min-width:28px;text-align:center;font-family:var(--mono);font-size:14px;font-weight:700}
 .tag{display:inline-block;font-size:11px;padding:2px 7px;border-radius:5px;background:var(--s3);color:var(--mu);font-family:var(--mono)}
 .msg{font-size:12px;padding:8px 12px;border-radius:7px;margin-top:10px;display:none}
-.mok{background:#44cc8820;color:var(--ok);border:1px solid #44cc8840}
-.mer{background:#ff444420;color:var(--er);border:1px solid #ff444440}
-.mwn{background:#ffaa0020;color:var(--wn);border:1px solid #ffaa0040}
+.mok{background:color-mix(in srgb,var(--ok) 14%,transparent);color:var(--ok);border:1px solid color-mix(in srgb,var(--ok) 40%,transparent)}
+.mer{background:color-mix(in srgb,var(--er) 14%,transparent);color:var(--er);border:1px solid color-mix(in srgb,var(--er) 40%,transparent)}
+.mwn{background:color-mix(in srgb,var(--wn) 14%,transparent);color:var(--wn);border:1px solid color-mix(in srgb,var(--wn) 40%,transparent)}
 .spin{display:inline-block;width:12px;height:12px;border:2px solid var(--br);border-top-color:var(--mag);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:6px}
 @keyframes spin{to{transform:rotate(360deg)}}
 .ar{background:var(--s1);border:1px solid var(--br);border-radius:var(--r);padding:13px 16px;margin-bottom:9px;display:flex;justify-content:space-between;align-items:center;gap:12px}
@@ -87,7 +88,7 @@ tr:hover td{background:var(--s2)}
 .vrow-hdr span{font-size:10px;color:var(--mu);font-family:var(--mono);text-transform:uppercase;letter-spacing:.05em}
 .vtotal{background:var(--s1);border:1px solid var(--mag);border-radius:var(--r);padding:16px 20px;display:flex;justify-content:space-between;align-items:center;margin:14px 0}
 .vtotal-lbl{color:var(--mu);font-size:13px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em}
-.vtotal-val{font-family:var(--mono);font-size:28px;font-weight:700;color:#fff}
+.vtotal-val{font-family:var(--mono);font-size:28px;font-weight:700;color:var(--tx)}
 .btn-add-row{display:flex;align-items:center;gap:8px;background:transparent;border:1px dashed var(--br2);border-radius:7px;padding:9px 16px;color:var(--mu);cursor:pointer;width:100%;font-size:13px;transition:all .15s;margin-bottom:14px}
 .btn-add-row:hover{border-color:var(--mag);color:var(--mag)}
 .cli-row{margin-bottom:14px}
@@ -117,7 +118,7 @@ tr:hover td{background:var(--s2)}
   </div>
   <div style="display:flex;align-items:center;gap:6px;font-size:11px;font-family:var(--mono)">
     <span class="dot-live"></span>
-    <span style="color:var(--ok)">Supabase</span>
+    <span style="color:#7ff0bd">Supabase</span>
   </div>
 </div>
 
@@ -132,7 +133,7 @@ tr:hover td{background:var(--s2)}
 <!-- DASHBOARD -->
 <div id="pg-dash" class="pg on">
   <div class="gm">
-    <div class="mt"><div class="ml">Productos</div><div class="mv" id="m-tot" style="color:#a090ff">0</div></div>
+    <div class="mt"><div class="ml">Productos</div><div class="mv" id="m-tot" style="color:var(--az)">0</div></div>
     <div class="mt"><div class="ml">Stock bajo</div><div class="mv" id="m-low" style="color:var(--wn)">0</div></div>
     <div class="mt"><div class="ml">Sin stock</div><div class="mv" id="m-out" style="color:var(--er)">0</div></div>
     <div class="mt"><div class="ml">Ventas hoy</div><div class="mv" id="m-hoy" style="color:var(--mag)">$0</div></div>
